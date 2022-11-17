@@ -147,7 +147,7 @@ button:disabled {
 
 .message .message__text {
     background-color: #e3d2ff;
-    border-radius: 16px 16px 16px 0;
+    border-radius: 12px 12px 12px 0;
     padding: 4px 8px;
     display: inline-block;
 }
@@ -158,7 +158,7 @@ button:disabled {
 
 .self-message .message__text {
     background-color: #e7d7ff;
-    border-radius: 16px 16px 0 16px;
+    border-radius: 12px 12px 0 12px;
 }
 
 .system-message .message__text {
