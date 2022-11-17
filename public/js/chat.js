@@ -9,6 +9,7 @@ const $messages = document.querySelector('#messages')
 
 // Templates
 const messageTemplate = document.querySelector('#message-template').innerHTML
+const selfMessageTemplate = document.querySelector('#self-message-template').innerHTML
 const locationMessageTemplate = document.querySelector('#location-message-template').innerHTML
 const sidebarTemplate = document.querySelector('#sidebar-template').innerHTML
 
@@ -42,6 +43,15 @@ const autoscroll = () => {
 socket.on('message', (message) => {
     const html = Mustache.render(messageTemplate, {
         username: message.username,
+        message: message.text,
+        createdAt: moment(message.createdAt).format('h:mm a')
+    })
+    $messages.insertAdjacentHTML('beforeend', html)
+    autoscroll()
+})
+
+socket.on('selfMessage', (message) => {
+    const html = Mustache.render(selfMessageTemplate, {
         message: message.text,
         createdAt: moment(message.createdAt).format('h:mm a')
     })
