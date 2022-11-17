@@ -10,7 +10,9 @@ const $messages = document.querySelector('#messages')
 // Templates
 const messageTemplate = document.querySelector('#message-template').innerHTML
 const selfMessageTemplate = document.querySelector('#self-message-template').innerHTML
+const systemMessageTemplate = document.querySelector('#system-message-template').innerHTML
 const locationMessageTemplate = document.querySelector('#location-message-template').innerHTML
+const selfLocationMessageTemplate = document.querySelector('#self-location-message-template').innerHTML
 const sidebarTemplate = document.querySelector('#sidebar-template').innerHTML
 
 // Options
@@ -35,7 +37,7 @@ const autoscroll = () => {
     // how far have I scrolled?
     const scrollOffset = $messages.scrollTop + visibleHeight
 
-    if(containerHeight - newMessageHeight <= scrollOffset){
+    if (containerHeight - newMessageHeight <= scrollOffset) {
         $messages.scrollTop = containerHeight
     }
 }
@@ -59,6 +61,14 @@ socket.on('selfMessage', (message) => {
     autoscroll()
 })
 
+socket.on('systemMessage', (message) => {
+    const html = Mustache.render(systemMessageTemplate, {
+        message: message.text,
+    })
+    $messages.insertAdjacentHTML('beforeend', html)
+    autoscroll()
+})
+
 socket.on('locationMessage', (message) => {
     const html = Mustache.render(locationMessageTemplate, {
         username: message.username,
@@ -66,6 +76,16 @@ socket.on('locationMessage', (message) => {
         createdAt: moment(message.createdAt).format('h:mm a')
     })
     $messages.insertAdjacentHTML('beforeend', html)
+    autoscroll()
+})
+
+socket.on('selfLocationMessage', (message) => {
+    const html = Mustache.render(selfLocationMessageTemplate, {
+        url: message.url,
+        createdAt: moment(message.createdAt).format('h:mm a')
+    })
+    $messages.insertAdjacentHTML('beforeend', html)
+    autoscroll()
 })
 
 socket.on('roomData', ({room, users}) => {
@@ -73,7 +93,7 @@ socket.on('roomData', ({room, users}) => {
         room,
         users
     })
-    document.querySelector('.chat__sidebar').innerHTML = html
+    document.querySelector('.chat__sidebar').innerHTML = html;
 })
 
 $messageForm.addEventListener('submit', (e) => {

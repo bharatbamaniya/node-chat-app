@@ -6,7 +6,7 @@
           name="viewport">
     <meta content="ie=edge" http-equiv="X-UA-Compatible">
     <link href="/img/favicon.png" rel="icon">
-    <link href="/css/styles.min.css" rel="stylesheet">
+    <link href="/css/styles.css" rel="stylesheet">
     <title>Chat App</title>
 </head>
 <body>
@@ -35,7 +35,7 @@
             <span class="message__name">{{username}}</span>
             <span class="message__meta">{{createdAt}}</span>
         </p>
-        <p>{{message}}</p>
+        <p class="message__text">{{message}}</p>
     </div>
 </script>
 
@@ -44,7 +44,13 @@
         <p>
             <span class="message__meta">{{createdAt}}</span>
         </p>
-        <p>{{message}}</p>
+        <p class="message__text">{{message}}</p>
+    </div>
+</script>
+
+<script id="system-message-template" type="text/html">
+    <div class="message system-message">
+        <p class="message__text">{{message}}</p>
     </div>
 </script>
 
@@ -54,7 +60,16 @@
             <span class="message__name">{{username}}</span>
             <span class="message__meta">{{createdAt}}</span>
         </p>
-        <p><a href="{{url}}" target="_blank">My current location</a></p>
+        <p class="message__text"><a href="{{url}}" target="_blank">{{url}}</a></p>
+    </div>
+</script>
+
+<script id="self-location-message-template" type="text/html">
+    <div class="message self-message">
+        <p>
+            <span class="message__meta">{{createdAt}}</span>
+        </p>
+        <p class="message__text"><a href="{{url}}" target="_blank">{{url}}</a></p>
     </div>
 </script>
 

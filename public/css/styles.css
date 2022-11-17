@@ -93,7 +93,7 @@ button:disabled {
     height: 100vh;
     color: white;
     background: #333744;
-    width: 225px;
+    min-width: 225px;
     overflow-y: scroll
 }
 
@@ -124,6 +124,12 @@ button:disabled {
     align-items: flex-end;
 }
 
+.system-message{
+    display: flex;
+    justify-content: center;
+    font-size: 12px;
+}
+
 .message__name {
     font-weight: 600;
     font-size: 14px;
@@ -137,6 +143,25 @@ button:disabled {
 
 .message a {
     color: #0070CC;
+}
+
+.message .message__text {
+    background-color: lightblue;
+    border-radius: 16px 16px 16px 0;
+    padding: 4px 8px;
+    display: inline-block;
+}
+
+.self-message p{
+    text-align: end;
+}
+
+.self-message .message__text {
+    border-radius: 16px 16px 0 16px;
+}
+
+.system-message .message__text {
+    border-radius: 8px;
 }
 
 /* Message Composition Styles */
